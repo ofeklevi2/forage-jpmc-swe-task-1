@@ -1,0 +1,38 @@
+From b23c4cb300c7f95b32dba056db666f81c21442ec Mon Sep 17 00:00:00 2001
+From: unknown <ofeklevi2@mail.tau.ac.il>
+Date: Mon, 11 Sep 2023 11:26:09 +0300
+Subject: [PATCH] Task1 final test
+
+---
+ client_test.py | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/client_test.py b/client_test.py
+index d89153f..5b16769 100644
+--- a/client_test.py
++++ b/client_test.py
+@@ -1,5 +1,5 @@
+ import unittest
+-from client3 import getDataPoint
++from client3 import getDataPoint, getRatio
+ 
+ class ClientTest(unittest.TestCase):
+   def test_getDataPoint_calculatePrice(self):
+@@ -20,7 +20,14 @@ class ClientTest(unittest.TestCase):
+       self.assertEqual(getDataPoint(quote), (quote['stock'], quote['top_bid']['price'], quote['top_ask']['price'], (quote['top_bid']['price'] + quote['top_ask']['price']) / 2))
+ 
+   """ ------------ Add more unit tests ------------ """
++  def test_getRatio(self):
++    quotes = [
++      {'top_ask': {'price': 119.2, 'size': 36}, 'timestamp': '2019-02-11 22:06:30.572453', 'top_bid': {'price': 120.48, 'size': 109}, 'id': '0.109974697771', 'stock': 'ABC'},
++      {'top_ask': {'price': 121.68, 'size': 4}, 'timestamp': '2019-02-11 22:06:30.572453', 'top_bid': {'price': 117.87, 'size': 81}, 'id': '0.109974697771', 'stock': 'DEF'}
++    ]
+ 
++    for quote in quotes:
++      self.assertEqual(getRatio((quotes[0]['top_bid']['price'] + quotes[0]['top_ask']['price']) / 2, (quotes[1]['top_bid']['price'] + quotes[1]['top_ask']['price']) / 2) , ((quotes[0]['top_bid']['price'] + quotes[0]['top_ask']['price']) / 2) / ((quotes[1]['top_bid']['price'] + quotes[1]['top_ask']['price']) / 2))
+ 
+ 
+ if __name__ == '__main__':
+-- 
+2.35.1.windows.2
+
